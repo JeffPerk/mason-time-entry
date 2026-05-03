@@ -72,6 +72,8 @@
                         v-if="activeTab === 'new'"
                         :selected-company-id="selectedCompanyId"
                         :selected-company-name="selectedCompanyName"
+                        :companies="companies"
+                        @entries-created="handleEntriesCreated"
                     />
 
                     <HistoryTab
@@ -132,6 +134,10 @@ async function loadCompanies() {
     } finally {
         isLoading.value = false;
     }
+}
+
+function handleEntriesCreated() {
+    // The History tab will use this later to reload after new entries are saved.
 }
 
 onMounted(() => {

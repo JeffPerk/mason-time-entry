@@ -37,21 +37,27 @@ class TimeEntryController extends Controller
 
     public function store(StoreTimeEntriesRequest $request): JsonResponse
     {
-        $createdEntries = DB::transaction(function () use ($request) {
+        $createdEntryIds = DB::transaction(function () use ($request) {
             return collect($request->validatedEntries())
                 ->map(function (array $entry) {
                     unset($entry['created_at'], $entry['updated_at']);
-
-                    return TimeEntry::query()->create($entry);
+    
+                    return TimeEntry::query()->create($entry)->id;
                 })
-                ->load([
-                    'company:id,name',
-                    'employee:id,first_name,last_name,email',
-                    'project:id,name',
-                    'task:id,name',
-                ]);
+                ->all();
         });
-
+    
+        $createdEntries = TimeEntry::query()
+            ->with([
+                'company:id,name',
+                'employee:id,first_name,last_name,email',
+                'project:id,name',
+                'task:id,name',
+            ])
+            ->whereIn('id', $createdEntryIds)
+            ->orderBy('id')
+            ->get();
+    
         return response()->json([
             'message' => 'Time entries created successfully.',
             'data' => $createdEntries->map(fn (TimeEntry $entry) => $this->formatTimeEntry($entry)),

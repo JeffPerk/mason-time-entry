@@ -135,5 +135,27 @@
         "Used simple component boundaries to keep the New Entries and History features easier to build next."
       ],
       "status": "completed"
+    },
+    {
+      "step": 7,
+      "title": "Built New Entries tab with editable table and backend submission",
+      "prompt_summary": "User confirmed the Vue app shell was working and asked to move on to the New Entries tab.",
+      "ai_response_summary": "Replaced the New Entries placeholder with an editable Vue Composition API table. Added company/date/employee/project/task/hours fields, per-company dependent dropdown loading, add row, remove row, duplicate row, total pending hours, POST submission to the Laravel API, success feedback, and row-level backend validation errors.",
+      "files_created_or_modified": [
+        "resources/js/components/NewEntriesTab.vue",
+        "resources/js/components/TimeEntryApp.vue",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Loaded employees, projects, and tasks per selected company using the existing company options API endpoint.",
+        "Cached company options in the component to avoid unnecessary repeat API calls.",
+        "Kept each row independently editable so the top-level All company filter still allows mixed-company entry.",
+        "Allowed new rows to inherit the selected global company or previous row date for faster entry.",
+        "Added duplicate row behavior as a bonus faster data entry feature.",
+        "Displayed Laravel validation errors at the row and field level using keys like entries.0.project_id.",
+        "Submitted entries in bulk to the backend instead of saving row-by-row.",
+        "Emitted an entries-created event so the History tab can refresh after successful saves."
+      ],
+      "status": "completed"
     }
   ]
