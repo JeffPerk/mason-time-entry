@@ -92,5 +92,26 @@
         "Deferred store validation to a dedicated request object because business rule validation is central to the project."
       ],
       "status": "completed"
+    },
+    {
+      "step": 5,
+      "title": "Added backend validation and bulk time entry creation",
+      "prompt_summary": "User confirmed API routes and read controllers were complete and asked to move on to validation and bulk creation.",
+      "ai_response_summary": "Created a StoreTimeEntriesRequest for validating bulk time entry submissions. Added validation for required fields, valid IDs, company-specific relationships, employee project assignments, duplicate rows, and the rule that an employee can only work on one project per date while allowing multiple tasks for the same project/date. Updated the TimeEntryController store method to create entries inside a database transaction and return formatted created rows.",
+      "files_created_or_modified": [
+        "app/Http/Requests/StoreTimeEntriesRequest.php",
+        "app/Http/Controllers/Api/TimeEntryController.php",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Used a Form Request to keep validation logic out of the controller.",
+        "Validated relationship integrity on the backend instead of relying only on frontend dropdown filtering.",
+        "Allowed multiple task rows for the same employee, project, and date.",
+        "Blocked entries where the same employee is assigned to different projects on the same date.",
+        "Checked the one-project-per-date rule both within the current request and against existing database records.",
+        "Used a database transaction so a bulk submission either fully succeeds or fully fails.",
+        "Used individual create calls instead of bulk insert for clearer returned models and simpler take-home readability."
+      ],
+      "status": "completed"
     }
   ]
