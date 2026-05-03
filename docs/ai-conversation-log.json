@@ -113,5 +113,27 @@
         "Used individual create calls instead of bulk insert for clearer returned models and simpler take-home readability."
       ],
       "status": "completed"
+    },
+    {
+      "step": 6,
+      "title": "Built Vue application shell with company filter and tabs",
+      "prompt_summary": "User completed backend validation and bulk creation, resolved API validation response behavior, and asked to move on to the Vue app shell.",
+      "ai_response_summary": "Created the initial Vue Composition API frontend structure. Added a top-level TimeEntryApp component, company filter dropdown, New Entries tab, and History tab placeholders. Loaded companies from the Laravel API and wired selected company state into both tabs.",
+      "files_created_or_modified": [
+        "resources/js/app.js",
+        "resources/js/components/TimeEntryApp.vue",
+        "resources/js/components/CompanyFilter.vue",
+        "resources/js/components/NewEntriesTab.vue",
+        "resources/js/components/HistoryTab.vue",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Kept the Vue frontend as a Blade-mounted Composition API app without Vue Router or Pinia to match the small take-home scope.",
+        "Made the global company filter default to All as required.",
+        "Passed selected company state into both tabs so the filter can affect New Entries and History behavior.",
+        "Loaded companies once from the API at app startup.",
+        "Used simple component boundaries to keep the New Entries and History features easier to build next."
+      ],
+      "status": "completed"
     }
   ]
