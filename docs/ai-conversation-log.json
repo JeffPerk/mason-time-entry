@@ -157,5 +157,25 @@
         "Emitted an entries-created event so the History tab can refresh after successful saves."
       ],
       "status": "completed"
+    },
+    {
+      "step": 8,
+      "title": "Built History tab with filtering, search, sorting, and totals",
+      "prompt_summary": "User confirmed the New Entries tab tests were working after fixing the controller collection loading issue and asked to move on to the History tab.",
+      "ai_response_summary": "Replaced the History placeholder with a read-only Vue Composition API table that loads time entries from the Laravel API. Added company filtering through the global company dropdown, client-side search, sortable columns, total hours summary, manual refresh, and automatic refresh signaling after new entries are created.",
+      "files_created_or_modified": [
+        "resources/js/components/HistoryTab.vue",
+        "resources/js/components/TimeEntryApp.vue",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Loaded history entries from the existing GET /api/time-entries endpoint.",
+        "Used the optional company_id query parameter so the global company dropdown filters the History tab.",
+        "Added client-side search and sorting as bonus usability improvements without complicating the backend.",
+        "Added total hours based on the filtered visible results.",
+        "Used a refresh token from the parent component so successful New Entries submissions can trigger History reloads.",
+        "Kept the table read-only to satisfy the core requirement before attempting optional edit functionality."
+      ],
+      "status": "completed"
     }
   ]

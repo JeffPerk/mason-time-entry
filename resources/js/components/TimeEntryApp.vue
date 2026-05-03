@@ -80,6 +80,7 @@
                         v-else
                         :selected-company-id="selectedCompanyId"
                         :selected-company-name="selectedCompanyName"
+                        :refresh-token="historyRefreshToken"
                     />
                 </div>
             </section>
@@ -98,6 +99,7 @@ const selectedCompanyId = ref('');
 const activeTab = ref('new');
 const isLoading = ref(false);
 const loadError = ref('');
+const historyRefreshToken = ref(0);
 
 const selectedCompanyName = computed(() => {
     if (!selectedCompanyId.value) {
@@ -137,7 +139,7 @@ async function loadCompanies() {
 }
 
 function handleEntriesCreated() {
-    // The History tab will use this later to reload after new entries are saved.
+    historyRefreshToken.value += 1;
 }
 
 onMounted(() => {
