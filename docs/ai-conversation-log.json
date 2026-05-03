@@ -71,5 +71,26 @@
         "Ensured sample time entries allow multiple tasks on the same project/date but do not violate the one-project-per-date employee rule."
       ],
       "status": "completed"
+    },
+    {
+      "step": 4,
+      "title": "Added API routes and read controllers",
+      "prompt_summary": "User confirmed seeders were working and asked to move on to API routes and controllers.",
+      "ai_response_summary": "Created API routes and controllers for company lists, company-specific dropdown options, and time entry history. Added endpoints for loading companies, employees/projects/tasks by selected company, listing time entries, and a placeholder store endpoint to be replaced with full backend validation.",
+      "files_created_or_modified": [
+        "routes/api.php",
+        "app/Http/Controllers/Api/CompanyController.php",
+        "app/Http/Controllers/Api/CompanyOptionController.php",
+        "app/Http/Controllers/Api/TimeEntryController.php",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Kept API design small and REST-like for the take-home scope.",
+        "Used a company options endpoint so the frontend can efficiently load employees, projects, and tasks after a company is selected.",
+        "Filtered history rows by optional company_id so the global company dropdown can affect the History tab.",
+        "Used eager loading in the time entry index endpoint to avoid N+1 queries.",
+        "Deferred store validation to a dedicated request object because business rule validation is central to the project."
+      ],
+      "status": "completed"
     }
   ]
