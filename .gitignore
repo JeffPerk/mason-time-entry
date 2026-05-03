@@ -1,0 +1,55 @@
+*.log
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.backup
+.env.production
+.env.local
+.env.*.local
+.phpactor.json
+
+# PHP / Composer
+/vendor
+_ide_helper.php
+.phpunit.result.cache
+/.phpunit.cache
+auth.json
+
+# Node
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Laravel
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+Homestead.json
+Homestead.yaml
+
+# Vite / Vue toolchain (build artifacts & caches — not *.vue sources)
+dist/
+.vite/
+*.tsbuildinfo
+coverage/
+.nuxt/
+.output/
+.eslintcache
+
+# Editors & tooling
+/.codex
+/.cursor/
+/.fleet
+/.idea
+/.nova
+/.phpstorm.meta.php
+/.vscode
+/.zed

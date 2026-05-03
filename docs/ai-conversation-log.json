@@ -1,0 +1,75 @@
+[
+    {
+      "step": 1,
+      "title": "Created backend data model and migrations",
+      "prompt_summary": "User completed the Laravel and Vue setup and asked for the best next implementation step for the Mason time entry take-home project.",
+      "ai_response_summary": "Recommended starting with the backend foundation before the Vue interface. Designed the required database structure using companies, employees, projects, tasks, time_entries, and pivot tables for company_employee and project_employee. Provided migration definitions, indexes, constraints, and explained the reason for enforcing the one-project-per-employee-per-date business rule in backend validation.",
+      "files_created_or_modified": [
+        "database/migrations/create_companies_table.php",
+        "database/migrations/create_employees_table.php",
+        "database/migrations/create_projects_table.php",
+        "database/migrations/create_tasks_table.php",
+        "database/migrations/create_company_employee_table.php",
+        "database/migrations/create_project_employee_table.php",
+        "database/migrations/create_time_entries_table.php",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Started with the backend schema to make the frontend easier to build and validate.",
+        "Used company_employee because employees can belong to multiple companies.",
+        "Used project_employee because employees are assigned to one or more projects.",
+        "Kept tasks company-specific but not project-specific.",
+        "Added indexes for company/date, employee/date, and project/date history queries.",
+        "Added a unique constraint to prevent duplicate employee/project/task/date entries.",
+        "Planned to enforce the rule that an employee can only work on one project per date through backend validation."
+      ],
+      "status": "completed"
+    },
+    {
+      "step": 2,
+      "title": "Added Eloquent model relationships",
+      "prompt_summary": "User confirmed the migration step was complete and asked to continue building the Mason Laravel + Vue time entry project.",
+      "ai_response_summary": "Provided Eloquent model implementations for Company, Employee, Project, Task, and TimeEntry. Added fillable fields, casts, appended employee full name accessor, and all required relationships for companies, employees, projects, tasks, and time entries.",
+      "files_created_or_modified": [
+        "app/Models/Company.php",
+        "app/Models/Employee.php",
+        "app/Models/Project.php",
+        "app/Models/Task.php",
+        "app/Models/TimeEntry.php",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Added belongsToMany relationships for company-employee and project-employee assignments.",
+        "Added hasMany relationships from company to projects, tasks, and time entries.",
+        "Added belongsTo relationships from time entries to company, employee, project, and task.",
+        "Added an employee name accessor to simplify frontend dropdown labels.",
+        "Added casts for active flags and time entry date/hour values."
+      ],
+      "status": "completed"
+    },
+    {
+      "step": 3,
+      "title": "Created database seeders with realistic sample data",
+      "prompt_summary": "User completed the migrations and model relationship steps and asked to move onto seeders.",
+      "ai_response_summary": "Provided separate Laravel seeders for companies, employees, projects, tasks, and time entries. Seed data included employees belonging to multiple companies, employees assigned to projects, company-specific tasks, and sample time entries that respect the one-project-per-employee-per-date business rule.",
+      "files_created_or_modified": [
+        "database/seeders/CompanySeeder.php",
+        "database/seeders/EmployeeSeeder.php",
+        "database/seeders/ProjectSeeder.php",
+        "database/seeders/TaskSeeder.php",
+        "database/seeders/TimeEntrySeeder.php",
+        "database/seeders/DatabaseSeeder.php",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Used separate seeders instead of placing all seed logic in DatabaseSeeder to keep the project organized.",
+        "Created three companies to test the global company filter.",
+        "Created employees who can belong to one or more companies to exercise the many-to-many company relationship.",
+        "Created projects under specific companies and assigned employees to those projects.",
+        "Created tasks that are company-specific but not project-specific.",
+        "Added sample time entries for the History tab.",
+        "Ensured sample time entries allow multiple tasks on the same project/date but do not violate the one-project-per-date employee rule."
+      ],
+      "status": "completed"
+    }
+  ]
