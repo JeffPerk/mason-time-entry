@@ -10,4 +10,5 @@ Route::get('/companies', [CompanyController::class, 'index']);
 Route::get('/companies/{company}/options', [CompanyOptionController::class, 'show']);
 
 Route::get('/time-entries', [TimeEntryController::class, 'index']);
+Route::get('/time-entries/summary', [TimeEntryController::class, 'summary']);
 Route::post('/time-entries', [TimeEntryController::class, 'store']);

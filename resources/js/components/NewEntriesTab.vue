@@ -189,10 +189,10 @@
                                 <button
                                     type="button"
                                     class="rounded-lg border border-slate-300 px-2.5 py-2 text-xs font-medium text-slate-700 transition hover:bg-slate-50"
-                                    title="Duplicate row"
+                                    title="Add similar row"
                                     @click="duplicateRow(index)"
                                 >
-                                    Copy
+                                    Similar
                                 </button>
 
                                 <button
@@ -228,7 +228,7 @@
 
                 <button
                     type="button"
-                    class="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="rounded-xl bg-violet-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-600 disabled:cursor-not-allowed disabled:opacity-50"
                     :disabled="isSubmitting"
                     @click="submitEntries"
                 >
@@ -254,6 +254,22 @@ const props = defineProps({
     companies: {
         type: Array,
         required: true,
+    },
+    addRowSignal: {
+        type: Number,
+        default: 0,
+    },
+    duplicateRowSignal: {
+        type: Number,
+        default: 0,
+    },
+    submitSignal: {
+        type: Number,
+        default: 0,
+    },
+    clearSignal: {
+        type: Number,
+        default: 0,
     },
 });
 
@@ -387,6 +403,21 @@ function isOptionsLoading(companyId) {
     return loadingCompanyIds.value.has(String(companyId));
 }
 
+function duplicateLastRow() {
+    if (!rows.value.length) {
+        addRow();
+        return;
+    }
+
+    duplicateRow(rows.value.length - 1);
+}
+
+function clearMessages() {
+    validationErrors.value = {};
+    generalError.value = '';
+    successMessage.value = '';
+}
+
 async function loadOptionsForCompany(companyId) {
     if (!companyId) {
         return;
@@ -511,6 +542,34 @@ watch(
                 company_id: newCompanyId,
             };
         });
+    }
+);
+
+watch(
+    () => props.addRowSignal,
+    () => {
+        addRow();
+    }
+);
+
+watch(
+    () => props.duplicateRowSignal,
+    () => {
+        duplicateLastRow();
+    }
+);
+
+watch(
+    () => props.submitSignal,
+    () => {
+        submitEntries();
+    }
+);
+
+watch(
+    () => props.clearSignal,
+    () => {
+        clearMessages();
     }
 );
 

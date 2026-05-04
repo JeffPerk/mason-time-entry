@@ -195,5 +195,30 @@
         "Included the controller correction in the AI log to show iterative testing and refinement."
       ],
       "status": "completed"
+    },
+    {
+      "step": 10,
+      "title": "Added Mason-inspired UI polish, dashboard summary, and keyboard shortcuts",
+      "prompt_summary": "User confirmed the core project requirements were working and asked to implement the top three recommended enhancements: a dashboard summary strip, Mason-inspired theme polish, and keyboard shortcuts for faster data entry.",
+      "ai_response_summary": "Added a summary endpoint for time entry totals, updated the main Vue shell with a Mason-inspired dark neutral and violet accent theme, added dashboard summary cards, and implemented keyboard shortcuts for submitting entries, adding rows, duplicating the last row, and clearing messages. Also updated company filter styling and refined the New Entries duplicate action language to better support repeated time entry workflows.",
+      "files_created_or_modified": [
+        "routes/api.php",
+        "app/Http/Controllers/Api/TimeEntryController.php",
+        "resources/js/components/TimeEntryApp.vue",
+        "resources/js/components/CompanyFilter.vue",
+        "resources/js/components/NewEntriesTab.vue",
+        "resources/js/components/HistoryTab.vue",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Used a Mason-inspired theme rather than claiming exact official brand colors.",
+        "Chose a dark neutral and violet accent palette based on Mason's public product imagery and modern enterprise positioning.",
+        "Added a dedicated summary API endpoint instead of calculating all dashboard metrics only in the frontend.",
+        "Kept the summary endpoint lightweight by using aggregate queries.",
+        "Added keyboard shortcuts because the project spec specifically values keyboard-friendly and faster data entry.",
+        "Used parent-to-child signal props so keyboard shortcuts could trigger New Entries behavior without introducing global state management.",
+        "Changed duplicate row wording to Add similar row to better match the intended time-entry workflow."
+      ],
+      "status": "completed"
     }
   ]

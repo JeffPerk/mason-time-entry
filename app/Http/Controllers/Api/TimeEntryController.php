@@ -35,6 +35,26 @@ class TimeEntryController extends Controller
         ]);
     }
 
+    public function summary(Request $request): JsonResponse
+    {
+        $companyId = $request->query('company_id');
+    
+        $baseQuery = TimeEntry::query()
+            ->when($companyId, function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            });
+    
+        return response()->json([
+            'data' => [
+                'total_entries' => (clone $baseQuery)->count(),
+                'total_hours' => (float) (clone $baseQuery)->sum('hours'),
+                'employee_count' => (clone $baseQuery)->distinct('employee_id')->count('employee_id'),
+                'project_count' => (clone $baseQuery)->distinct('project_id')->count('project_id'),
+                'latest_entry_date' => (clone $baseQuery)->max('entry_date'),
+            ],
+        ]);
+    }
+    
     public function store(StoreTimeEntriesRequest $request): JsonResponse
     {
         $createdEntryIds = DB::transaction(function () use ($request) {

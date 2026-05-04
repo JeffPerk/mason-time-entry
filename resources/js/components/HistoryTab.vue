@@ -49,7 +49,7 @@
 
                 <button
                     type="button"
-                    class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+                    class="rounded-xl border border-violet-200 bg-white px-4 py-2 text-sm font-semibold text-violet-700 shadow-sm transition hover:bg-violet-50"
                     @click="loadEntries"
                 >
                     Refresh
