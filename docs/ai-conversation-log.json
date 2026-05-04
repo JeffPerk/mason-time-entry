@@ -177,5 +177,23 @@
         "Kept the table read-only to satisfy the core requirement before attempting optional edit functionality."
       ],
       "status": "completed"
+    },
+    {
+      "step": 9,
+      "title": "Documented project setup and corrected controller issue from testing",
+      "prompt_summary": "User confirmed the New Entries and History tabs were working and asked to move on to the next step.",
+      "ai_response_summary": "Added a reviewer-friendly README covering setup instructions, API endpoints, business rules, data model notes, UX decisions, performance considerations, and AI usage. Also documented a previous testing fix where the TimeEntryController attempted to call load on a regular Laravel support collection, which was corrected by capturing created IDs and re-querying the created entries with relationships.",
+      "files_created_or_modified": [
+        "README.md",
+        "docs/ai-conversation-log.json"
+      ],
+      "decisions": [
+        "Added setup instructions using SQLite to make the project easy for reviewers to run.",
+        "Documented the core business rule around one project per employee per date.",
+        "Explained frontend UX choices such as company filtering, row duplication, and row-level validation.",
+        "Documented performance considerations without over-engineering the take-home project.",
+        "Included the controller correction in the AI log to show iterative testing and refinement."
+      ],
+      "status": "completed"
     }
   ]
